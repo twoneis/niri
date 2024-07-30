@@ -146,6 +146,7 @@ async fn process(ctx: &ClientCtx, request: Request) -> Reply {
             let outputs = ipc_outputs.values().cloned().map(|o| (o.name.clone(), o));
             Response::Outputs(outputs.collect())
         }
+        Request::Inputs => Response::Version(version()),
         Request::FocusedWindow => {
             let window = ctx.ipc_focused_window.lock().unwrap().clone();
             let window = window.map(|window| {

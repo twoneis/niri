@@ -11,6 +11,7 @@ pub fn handle_msg(msg: Msg, json: bool) -> anyhow::Result<()> {
     let request = match &msg {
         Msg::Version => Request::Version,
         Msg::Outputs => Request::Outputs,
+        Msg::Inputs => Request::Inputs,
         Msg::FocusedWindow => Request::FocusedWindow,
         Msg::FocusedOutput => Request::FocusedOutput,
         Msg::Action { action } => Request::Action(action.clone()),
@@ -121,6 +122,9 @@ pub fn handle_msg(msg: Msg, json: bool) -> anyhow::Result<()> {
                 print_output(connector, output)?;
                 println!();
             }
+        }
+        Msg::Inputs => {
+            println!("unexpected response: ");
         }
         Msg::FocusedWindow => {
             let Response::FocusedWindow(window) = response else {

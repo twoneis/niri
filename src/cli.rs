@@ -60,6 +60,8 @@ pub enum Sub {
 pub enum Msg {
     /// List connected outputs.
     Outputs,
+    /// List connected inputs
+    Inputs,
     /// List workspaces.
     Workspaces,
     /// Print information about the focused window.

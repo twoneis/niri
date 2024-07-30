@@ -17,6 +17,8 @@ pub enum Request {
     Version,
     /// Request information about connected outputs.
     Outputs,
+    /// Request information about connected inputs.
+    Inputs,
     /// Request information about the focused window.
     FocusedWindow,
     /// Perform an action.
@@ -62,6 +64,10 @@ pub enum Response {
     ///
     /// Map from connector name to output info.
     Outputs(HashMap<String, Output>),
+    /// Information about connected inputs.
+    ///
+    /// Map from connector name to input info.
+    Inputs(HashMap<String, Input>),
     /// Information about the focused window.
     FocusedWindow(Option<Window>),
     /// Output configuration change result.
@@ -451,6 +457,14 @@ pub struct Output {
     ///
     /// `None` if the output is not mapped to any logical output (for example, if it is disabled).
     pub logical: Option<LogicalOutput>,
+}
+
+/// Connected input.
+#[derive(Debug, Serialize, Deserialize, Clone)]
+#[cfg_attr(feature = "json-schema", derive(schemars::JsonSchema))]
+pub struct Input {
+    /// Name of the input.
+    pub name: String,
 }
 
 /// Output mode.
